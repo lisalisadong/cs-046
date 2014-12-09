@@ -1,0 +1,17 @@
+#BlueJ package file
+package.editor.height=400
+package.editor.width=560
+package.editor.x=50
+package.editor.y=50
+package.numDependencies=0
+package.numTargets=1
+package.showExtends=true
+package.showUses=true
+project.charset=US-ASCII
+target1.height=50
+target1.name=TwoLineHelloWorld
+target1.showInterface=false
+target1.type=ClassTarget
+target1.width=160
+target1.x=70
+target1.y=10
