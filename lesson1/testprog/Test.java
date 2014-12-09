@@ -1,3 +1,5 @@
+package testprog;
+
 // You can use this program to run experiments
 // 1. Add statements inside main
 // 2. Compile 

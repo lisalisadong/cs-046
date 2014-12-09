@@ -1,4 +1,6 @@
 #BlueJ package file
+objectbench.height=76
+objectbench.width=668
 package.editor.height=400
 package.editor.width=560
 package.editor.x=30
@@ -12,6 +14,7 @@ target1.height=50
 target1.name=CompileOrRunTime
 target1.showInterface=false
 target1.type=ClassTarget
+target1.typeParameters=
 target1.width=160
 target1.x=70
 target1.y=10
