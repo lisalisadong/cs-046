@@ -1,6 +1,6 @@
 bin/*
-*.bluej
-.DS_Store
-*.txt
-*.TXT
-*.ctxt
+*/*.bluej
+*/.DS_Store
+*/*.txt
+*/*.TXT
+*/*.ctxt
