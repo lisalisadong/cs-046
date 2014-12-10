@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=red\ green\ blue
+comment0.target=Color(int,\ int,\ int)
+comment0.text=\n\ \ \ \ \ \ \ Constructs\ a\ new\ Color\ object.\n\ \ \ \ \ \ \ @param\ red\ the\ red\ value\ of\ the\ color\ (between\ 0\ and\ 255)\n\ \ \ \ \ \ \ @param\ green\ the\ green\ value\ of\ the\ color\ (between\ 0\ and\ 255)\n\ \ \ \ \ \ \ @param\ blue\ the\ blue\ value\ of\ the\ color\ (between\ 0\ and\ 255)\n
+comment1.params=
+comment1.target=int\ getRed()
+comment1.text=\n\ \ \ \ \ \ \ Gets\ the\ red\ value\ of\ this\ color.\n\ \ \ \ \ \ \ @return\ the\ red\ value\ (between\ 0\ and\ 255)\n
+comment2.params=
+comment2.target=int\ getGreen()
+comment2.text=\n\ \ \ \ \ \ \ Gets\ the\ green\ value\ of\ this\ color.\n\ \ \ \ \ \ \ @return\ the\ green\ value\ (between\ 0\ and\ 255)\n
+comment3.params=
+comment3.target=int\ getBlue()
+comment3.text=\n\ \ \ \ \ \ \ Gets\ the\ blue\ value\ of\ this\ color.\n\ \ \ \ \ \ \ @return\ the\ blue\ value\ (between\ 0\ and\ 255)\n
+comment4.params=
+comment4.target=java.lang.String\ toString()
+numComments=5
