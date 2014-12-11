@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=red\ green\ blue
+comment0.target=Color(int,\ int,\ int)
+comment0.text=\r\n\ Constructs\ a\ new\ Color\ object.\r\n\ @param\ red\ the\ red\ value\ of\ the\ color\ (between\ 0\ and\ 255)\r\n\ @param\ green\ the\ green\ value\ of\ the\ color\ (between\ 0\ and\ 255)\r\n\ @param\ blue\ the\ blue\ value\ of\ the\ color\ (between\ 0\ and\ 255)\r\n
+comment1.params=
+comment1.target=int\ getRed()
+comment1.text=\r\n\ Gets\ the\ red\ value\ of\ this\ color.\r\n\ @return\ the\ red\ value\ (between\ 0\ and\ 255)\r\n
+comment2.params=
+comment2.target=int\ getGreen()
+comment2.text=\r\n\ Gets\ the\ green\ value\ of\ this\ color.\r\n\ @return\ the\ green\ value\ (between\ 0\ and\ 255)\r\n
+comment3.params=
+comment3.target=int\ getBlue()
+comment3.text=\r\n\ Gets\ the\ blue\ value\ of\ this\ color.\r\n\ @return\ the\ blue\ value\ (between\ 0\ and\ 255)\r\n
+numComments=4

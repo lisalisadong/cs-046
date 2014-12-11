@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.params=x\ y\ message
+comment0.target=Text(double,\ double,\ java.lang.String)
+comment0.text=\r\n\ Constructs\ a\ text\ at\ a\ given\ location.\r\n\ @param\ x\ the\ leftmost\ x-position\ of\ the\ shape\r\n\ @param\ y\ the\ topmost\ y-position\ of\ the\ shape\r\n\ @param\ message\ the\ text\ string\ \r\n
+comment1.params=
+comment1.target=int\ getX()
+comment1.text=\r\n\ Gets\ the\ leftmost\ x-position\ of\ the\ bounding\ box.\r\n\ @return\ the\ leftmost\ x-position\r\n
+comment2.params=
+comment2.target=int\ getY()
+comment2.text=\r\n\ Gets\ the\ topmost\ y-position\ of\ the\ bounding\ box.\r\n\ @return\ the\ topmost\ y-position\r\n
+comment3.params=
+comment3.target=int\ getWidth()
+comment3.text=\r\n\ Gets\ the\ width\ of\ the\ bounding\ box.\r\n\ @return\ the\ width\r\n
+comment4.params=
+comment4.target=int\ getHeight()
+comment4.text=\r\n\ Gets\ the\ height\ of\ the\ bounding\ box.\r\n\ @return\ the\ height\r\n
+comment5.params=dw\ dh
+comment5.target=void\ grow(double,\ double)
+comment5.text=\r\n\ Resizes\ this\ text\ both\ horizontally\ and\ vertically.\r\n\ @param\ dw\ the\ amount\ by\ which\ to\ resize\ the\ width\ on\ each\ side\r\n\ @param\ dw\ the\ amount\ by\ which\ to\ resize\ the\ height\ on\ each\ side\r\n
+comment6.params=
+comment6.target=void\ draw()
+comment6.text=\r\n\ Shows\ this\ text\ on\ the\ canvas.\r\n
+comment7.params=
+comment7.target=java.lang.String\ toString()
+comment8.params=g2
+comment8.target=void\ paintShape(java.awt.Graphics2D)
+numComments=9
