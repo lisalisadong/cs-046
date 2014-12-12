@@ -1,5 +1,7 @@
 package growtester;
 
+import predefined.Rectangle;
+
 // BlueJ project lesson2/growtester
 // 
 // Print out the actual AND expected values for the

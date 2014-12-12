@@ -23,6 +23,8 @@ package ps1.BlockTower;
 //
 //Don't forget to draw the rectangle by calling the fill() function
 
+import predefined.Rectangle;
+import predefined.Color;
 
 public class BlockTower
 {

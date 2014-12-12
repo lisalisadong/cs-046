@@ -1,5 +1,8 @@
 package copyingRectangles;
 
+import predefined.Color;
+import predefined.Rectangle;
+
 public class CopyingRectangles
 {
     public static void main(String[] args)

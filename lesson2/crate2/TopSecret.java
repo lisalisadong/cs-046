@@ -1,5 +1,9 @@
 package crate2;
 
+import predefined.Line;
+import predefined.Rectangle;
+import predefined.Text;
+
 // BlueJ project: lesson2/crate2
 
 public class TopSecret

@@ -1,5 +1,10 @@
 package ps1.BlockTower;
 
+import predefined.Ellipse;
+import predefined.Picture;
+import predefined.Canvas;
+import predefined.Color;
+
 public class Demo
 {
    public static void main(String[] args)

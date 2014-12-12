@@ -1,4 +1,4 @@
-package errors;
+ 
 
 public class Error3
 {

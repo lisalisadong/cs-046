@@ -1,5 +1,8 @@
 package color;
 
+import predefined.Rectangle;
+import predefined.Color;
+
 public class ColorIntro
 {
     public static void main(String[] args)

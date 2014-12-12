@@ -1,5 +1,7 @@
 package touchingRectangles;
 
+import predefined.Rectangle;
+
 // BlueJ project: lesson2/touchingRectangles
 //
 // You need to construct and draw two rectangles for this quiz.

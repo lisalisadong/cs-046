@@ -1,5 +1,8 @@
 package crate;
 
+import predefined.Line;
+import predefined.Rectangle;
+
 // BlueJ project: lesson2/crate
 
 // Draw a crate by combining a rectangle with five lines.
