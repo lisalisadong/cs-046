@@ -1,4 +1,4 @@
-package ps1.NameInBox;
+package ps1.nameInBox;
 
 // Write a program that will print the word Udacity in a box
 // so that it looks exactly like the figure below. Name the program NameInBox

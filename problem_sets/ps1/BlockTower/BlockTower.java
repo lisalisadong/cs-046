@@ -1,4 +1,4 @@
-package ps1.BlockTower;
+package ps1.blockTower;
 
 //Write the code to draw a tower of blocks that looks like the one in the link below:
 //http://i.imgur.com/PvIGJkL.png

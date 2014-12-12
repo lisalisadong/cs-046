@@ -1,4 +1,4 @@
-package ps1.hw01_20_string_replace;
+package ps1.stringReplace;
 
 //hw01_09
 /*

@@ -1,4 +1,4 @@
-package ps1.BlockTower;
+package ps1.blockTower;
 
 import predefined.Ellipse;
 import predefined.Picture;

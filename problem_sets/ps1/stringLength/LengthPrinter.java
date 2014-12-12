@@ -1,4 +1,4 @@
-package ps1.hw01_07_string_length;
+package ps1.stringLength;
 
 //hw01_07
 public class LengthPrinter

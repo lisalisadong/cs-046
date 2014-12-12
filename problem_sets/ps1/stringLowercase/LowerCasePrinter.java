@@ -1,4 +1,4 @@
-package ps1.hw01_19_String_lowercase;
+package ps1.stringLowercase;
 
 public class LowerCasePrinter
 {
