@@ -12,7 +12,7 @@ public class Test
     public static void main(String[] args)
     {
         // Add something inside the ( )
-        System.out.println(  );
+        System.out.println("My favorite book is, \"Warrior's Apprentice\"");
         // Add more statements below, as needed
     }
 }
