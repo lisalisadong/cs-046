@@ -1,4 +1,4 @@
-package predefined;
+package fewerColor;
 
 //HIDE
 //OUT canvas.png

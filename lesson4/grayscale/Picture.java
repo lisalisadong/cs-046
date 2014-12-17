@@ -1,4 +1,4 @@
-package predefined;
+package grayscale;
 
 //HIDE
 //OUT canvas.png

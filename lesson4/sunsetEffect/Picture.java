@@ -1,4 +1,4 @@
-package predefined;
+package sunsetEffect;
 
 //HIDE
 //OUT canvas.png

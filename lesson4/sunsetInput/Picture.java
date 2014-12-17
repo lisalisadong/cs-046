@@ -1,4 +1,4 @@
-package predefined;
+package sunsetInput;
 
 //HIDE
 //OUT canvas.png
