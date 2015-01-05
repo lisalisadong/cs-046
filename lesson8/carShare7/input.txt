@@ -1,0 +1,9 @@
+4 Jane 3
+2 Fred 2
+0 Ann 3
+0 Sue 1
+0 Pat 4
+0 Kim 3
+0 Joe 3
+0 Lee 2
+-1

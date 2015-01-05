@@ -13,6 +13,7 @@
 	<classpathentry kind="src" path="lesson7-1"/>
 	<classpathentry kind="src" path="lesson7-2"/>
 	<classpathentry kind="src" path="lesson7-3"/>
+	<classpathentry kind="src" path="lesson8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

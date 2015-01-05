@@ -1,0 +1,42 @@
+Hi!
+
+For this project you will be modifying several different files. 
+
+You can see them by clicking the tabs just above these words. 
+
+You don't need to change Simulation.java. It is there in case you want to see the 
+main method that is running. 
+
+You will need to change 
+ - Manager.java  
+ - Photographer.java. 
+and maybe 
+ - Assignment.java
+ - FinishedPhoto.java
+ - Portfolio.java
+    
+Blank.java is currently missing, but I may add it if it's useful. 
+
+I recommend looking at Manager.java first. You're goal is to implement the Manager
+class, using Photographer, Assignment, FinishedPhoto, and Portfolio. 
+Photographer, Assignment, FinishedPhto, and Portfolio are currently unfinished.
+You will need to implement them. 
+
+story.txt and photos.txt are just there so you can see what is being run when you click
+test run or submit. Simulation.java reads the story, and calls methods on a Manager object
+to act out the story. Photographer.java uses the photos whose file names are in photos.txt
+to take pictures. 
+
+There are hint videos to help you along the way. look to the right of the screen. 
+There should be links above the submit button to talk you through a few steps of the problem. 
+
+This question is difficult and optional, but I think you can do it.
+
+Happy Coding!
+
+P.S. I highly recommend using bluej so that you can write a PortfolioTester and run it to make
+sure the Portfolio does what you want before you use Portfolio objects in the other classes.
+
+
+
+
