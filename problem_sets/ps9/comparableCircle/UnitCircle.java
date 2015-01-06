@@ -11,7 +11,7 @@ package ps9.comparableCircle;
  */
 // TODO: add everything necessary for this class to implement Comparable
 // HINT: There are two things you need to do
-public class UnitCircle
+public class UnitCircle implements Comparable
 {
    private int radius;
 
@@ -32,6 +32,9 @@ public class UnitCircle
 
 
    //... other methods
-
+   public int compareTo(Object otherObject)
+   {
+	   return this.getRadius() - ((UnitCircle) otherObject).getRadius();
+   }
 
 }
