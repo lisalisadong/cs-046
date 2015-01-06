@@ -1,5 +1,5 @@
-CS046: [Intro to Java Programming by Udacity](https://www.udacity.com/course/cs046)
-
+CS046: Intro to Java Programming by Udacity
+------
 I am taking this object-oriented programming course taught in Java, by [Prof. Cay Horstmann](http://www.horstmann.com/) on [Udacity](https://www.udacity.com/course/cs046
 ). Several fundamental data structures and object-oriented design concepts (e.g., encapsulation, polymorphism) are practiced through the course. For the final project, I will create a game-playing agent to play [Connect Four](http://en.wikipedia.org/wiki/Connect_Four).
 
