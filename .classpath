@@ -16,6 +16,7 @@
 	<classpathentry kind="src" path="lesson8"/>
 	<classpathentry kind="src" path="lesson9"/>
 	<classpathentry kind="src" path="course_assessment"/>
+	<classpathentry excluding="classes/" kind="src" path="final_project"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
