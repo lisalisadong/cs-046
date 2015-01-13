@@ -37,7 +37,21 @@ public class MyAgent extends Agent
      */
     public void move()
     {
-
+    	if (ICanWin() > -1)
+    	{
+    		moveOnColumn(ICanWin());
+    		System.out.println("i can win");
+    	}
+    	else if (TheyCanWin() > -1)
+    	{
+    		moveOnColumn(TheyCanWin());
+    		System.out.println("they can win");
+    	}
+    	else
+    	{
+    		moveOnColumn(randomMove());
+    		System.out.println("random");
+    	}
     }
 
     /**
@@ -105,7 +119,108 @@ public class MyAgent extends Agent
      */
     public int ICanWin()
     {
-        return 0;
+    	for (int i = 0; i < myGame.getColumnCount(); i++)
+    	{
+    		int j = getLowestEmptyIndex(myGame.getColumn(i));
+    		if (j > -1)
+    		{
+	    		int left = 0;
+	    		int right = 0;
+	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 3).getIsRed() == iAmRed)
+	    		{
+	    			return i;
+	    		}
+	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && myGame.getColumn(i - 2).getSlot(j).getIsFilled() && myGame.getColumn(i - 2).getSlot(j).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    				if (i >= 3 && myGame.getColumn(i - 3).getSlot(j).getIsFilled() && myGame.getColumn(i - 3).getSlot(j).getIsRed() == iAmRed)
+	        			{
+	        				left++;
+	        			}
+	    			}
+	    		}
+	    		if (i + 1 < myGame.getColumnCount() && myGame.getColumn(i + 1).getSlot(j).getIsFilled() && myGame.getColumn(i + 1).getSlot(j).getIsRed() == iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < myGame.getColumnCount() && myGame.getColumn(i + 2).getSlot(j).getIsFilled() && myGame.getColumn(i + 2).getSlot(j).getIsRed() == iAmRed)
+	    			{
+	    				right++;
+	    				if (i + 3 < myGame.getColumnCount() && myGame.getColumn(i + 3).getSlot(j).getIsFilled() && myGame.getColumn(i + 3).getSlot(j).getIsRed() == iAmRed)
+	        			{
+	        				right++;
+	        			}
+	    			}
+	    		}
+	    		if (left + right >= 3)
+	    		{
+	    			return i;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && j >=1 && myGame.getColumn(i - 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j - 1).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && j >=2 && myGame.getColumn(i - 2).getSlot(j - 2).getIsFilled() && myGame.getColumn(i - 2).getSlot(j - 2).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    				if (i >= 3 && j >=3 && myGame.getColumn(i - 3).getSlot(j - 3).getIsFilled() && myGame.getColumn(i - 3).getSlot(j - 3).getIsRed() == iAmRed)
+	        			{
+	        				left++;
+	        			}
+	    			}
+	    		}
+	    		if (i + 1 < myGame.getColumnCount() && j + 1 < myGame.getRowCount() && myGame.getColumn(i + 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i + 1).getSlot(j + 1).getIsRed() == iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < myGame.getColumnCount() && j + 2 < myGame.getRowCount() && myGame.getColumn(i + 2).getSlot(j + 2).getIsFilled() && myGame.getColumn(i + 2).getSlot(j + 2).getIsRed() == iAmRed)
+	    			{
+	    				right++;
+	    				if (i + 3 < myGame.getColumnCount() && j + 3 < myGame.getRowCount() && myGame.getColumn(i + 3).getSlot(j + 3).getIsFilled() && myGame.getColumn(i + 3).getSlot(j + 3).getIsRed() == iAmRed)
+	        			{
+	        				right++;
+	        			}
+	    			}
+	    		}
+	    		if (left + right >= 3)
+	    		{
+	    			return i;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && j + 1 < myGame.getRowCount() && myGame.getColumn(i - 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j + 1).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && j + 2 < myGame.getRowCount() && myGame.getColumn(i - 2).getSlot(j + 2).getIsFilled() && myGame.getColumn(i - 2).getSlot(j + 2).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    				if (i >= 3 && j + 3 < myGame.getRowCount() && myGame.getColumn(i - 3).getSlot(j + 3).getIsFilled() && myGame.getColumn(i - 3).getSlot(j + 3).getIsRed() == iAmRed)
+	        			{
+	        				left++;
+	        			}
+	    			}
+	    		}
+	    		if (i + 1 < myGame.getColumnCount() && j >= 1 && myGame.getColumn(i + 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i + 1).getSlot(j - 1).getIsRed() == iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < myGame.getColumnCount() && j >= 2 &&  myGame.getColumn(i + 2).getSlot(j - 2).getIsFilled() && myGame.getColumn(i + 2).getSlot(j - 2).getIsRed() == iAmRed)
+	    			{
+	    				right++;
+	    				if (i + 3 < myGame.getColumnCount() && j >= 3 &&  myGame.getColumn(i + 3).getSlot(j - 3).getIsFilled() && myGame.getColumn(i + 3).getSlot(j - 3).getIsRed() == iAmRed)
+	        			{
+	        				right++;
+	        			}
+	    			}
+	    		}
+	    		if (left + right >= 3)
+	    		{
+	    			return i;
+	    		}
+    		}
+    	}
+        return -1;
     }
 
     /**
@@ -117,7 +232,108 @@ public class MyAgent extends Agent
      */
     public int TheyCanWin()
     {
-        return 0;
+    	for (int i = 0; i < myGame.getColumnCount(); i++)
+    	{
+    		int j = getLowestEmptyIndex(myGame.getColumn(i));
+    		if (j > -1)
+    		{
+	    		int left = 0;
+	    		int right = 0;
+	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == !iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == !iAmRed && myGame.getColumn(i).getSlot(j + 3).getIsRed() == !iAmRed)
+	    		{
+	    			return i;
+	    		}
+	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == !iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && myGame.getColumn(i - 2).getSlot(j).getIsFilled() && myGame.getColumn(i - 2).getSlot(j).getIsRed() == !iAmRed)
+	    			{
+	    				left++;
+	    				if (i >= 3 && myGame.getColumn(i - 3).getSlot(j).getIsFilled() && myGame.getColumn(i - 3).getSlot(j).getIsRed() == !iAmRed)
+	        			{
+	        				left++;
+	        			}
+	    			}
+	    		}
+	    		if (i + 1 < myGame.getColumnCount() && myGame.getColumn(i + 1).getSlot(j).getIsFilled() && myGame.getColumn(i + 1).getSlot(j).getIsRed() == !iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < myGame.getColumnCount() && myGame.getColumn(i + 2).getSlot(j).getIsFilled() && myGame.getColumn(i + 2).getSlot(j).getIsRed() == !iAmRed)
+	    			{
+	    				right++;
+	    				if (i + 3 < myGame.getColumnCount() && myGame.getColumn(i + 3).getSlot(j).getIsFilled() && myGame.getColumn(i + 3).getSlot(j).getIsRed() == !iAmRed)
+	        			{
+	        				right++;
+	        			}
+	    			}
+	    		}
+	    		if (left + right >= 3)
+	    		{
+	    			return i;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && j >=1 && myGame.getColumn(i - 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j - 1).getIsRed() == !iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && j >=2 && myGame.getColumn(i - 2).getSlot(j - 2).getIsFilled() && myGame.getColumn(i - 2).getSlot(j - 2).getIsRed() == !iAmRed)
+	    			{
+	    				left++;
+	    				if (i >= 3 && j >=3 && myGame.getColumn(i - 3).getSlot(j - 3).getIsFilled() && myGame.getColumn(i - 3).getSlot(j - 3).getIsRed() == !iAmRed)
+	        			{
+	        				left++;
+	        			}
+	    			}
+	    		}
+	    		if (i + 1 < myGame.getColumnCount() && j + 1 < myGame.getRowCount() && myGame.getColumn(i + 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i + 1).getSlot(j + 1).getIsRed() == !iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < myGame.getColumnCount() && j + 2 < myGame.getRowCount() && myGame.getColumn(i + 2).getSlot(j + 2).getIsFilled() && myGame.getColumn(i + 2).getSlot(j + 2).getIsRed() == !iAmRed)
+	    			{
+	    				right++;
+	    				if (i + 3 < myGame.getColumnCount() && j + 3 < myGame.getRowCount() && myGame.getColumn(i + 3).getSlot(j + 3).getIsFilled() && myGame.getColumn(i + 3).getSlot(j + 3).getIsRed() == !iAmRed)
+	        			{
+	        				right++;
+	        			}
+	    			}
+	    		}
+	    		if (left + right >= 3)
+	    		{
+	    			return i;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && j + 1 < myGame.getRowCount() && myGame.getColumn(i - 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j + 1).getIsRed() == !iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && j + 2 < myGame.getRowCount() && myGame.getColumn(i - 2).getSlot(j + 2).getIsFilled() && myGame.getColumn(i - 2).getSlot(j + 2).getIsRed() == !iAmRed)
+	    			{
+	    				left++;
+	    				if (i >= 3 && j + 3 < myGame.getRowCount() && myGame.getColumn(i - 3).getSlot(j + 3).getIsFilled() && myGame.getColumn(i - 3).getSlot(j + 3).getIsRed() == !iAmRed)
+	        			{
+	        				left++;
+	        			}
+	    			}
+	    		}
+	    		if (i + 1 < myGame.getColumnCount() && j >= 1 && myGame.getColumn(i + 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i + 1).getSlot(j - 1).getIsRed() == !iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < myGame.getColumnCount() && j >= 2 &&  myGame.getColumn(i + 2).getSlot(j - 2).getIsFilled() && myGame.getColumn(i + 2).getSlot(j - 2).getIsRed() == !iAmRed)
+	    			{
+	    				right++;
+	    				if (i + 3 < myGame.getColumnCount() && j >= 3 &&  myGame.getColumn(i + 3).getSlot(j - 3).getIsFilled() && myGame.getColumn(i + 3).getSlot(j - 3).getIsRed() == !iAmRed)
+	        			{
+	        				right++;
+	        			}
+	    			}
+	    		}
+	    		if (left + right >= 3)
+	    		{
+	    			return i;
+	    		}
+    		}
+    	}
+        return -1;
     }
 
     public String getName()
