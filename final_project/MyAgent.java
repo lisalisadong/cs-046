@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Random;
 
 public class MyAgent extends Agent
@@ -39,18 +40,17 @@ public class MyAgent extends Agent
     {
     	if (ICanWin() > -1)
     	{
+    		System.out.println("I can win!" + ICanWin());
     		moveOnColumn(ICanWin());
-    		System.out.println("i can win");
     	}
-    	else if (TheyCanWin() > -1)
+    	else if (TheyCanWin(0, 0) > -1)
     	{
-    		moveOnColumn(TheyCanWin());
-    		System.out.println("they can win");
+    		System.out.println("They can win!" + TheyCanWin(0, 0));
+    		moveOnColumn(TheyCanWin(0, 0));
     	}
     	else
     	{
-    		moveOnColumn(randomMove());
-    		System.out.println("random");
+    		moveOnColumn(brilliantMove());
     	}
     }
 
@@ -109,7 +109,171 @@ public class MyAgent extends Agent
         }
         return i;
     }
+    
+    /**
+     * Returns a brilliant valid move. MyAgent will make a move which will generate a longest route.
+     * 
+     */
+    public int brilliantMove()
+    {
+    	int longest = 0;
+    	int bestMove = randomMove();
+    	int howMuchBetter = 0;
+    	int row = myGame.getRowCount();
+    	int column = myGame.getColumnCount();
+    	HashSet<Integer> dangerous = dangerousMove();
+    	for (int i = 0; i < column; i++)
+    	{
+    		int j = getLowestEmptyIndex(myGame.getColumn(i));
+    		if (j > -1 && !dangerous.contains(i))
+    		{
+    			int cache = 0;
+	    		int left = 0;
+	    		int right = 0;
+	    		if (row - j > 1 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (row - j > 2 && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    			}
+	    		}
+	    		if (left + right > longest)
+	    		{
+	    			longest = left + right;
+	    			bestMove = i;
+	    		}
+	    		if (longest != 0 && left + right == longest)
+	    		{
+	    			cache++;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && myGame.getColumn(i - 2).getSlot(j).getIsFilled() && myGame.getColumn(i - 2).getSlot(j).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    			}
+	    		}
+	    		if (i + 1 < column && myGame.getColumn(i + 1).getSlot(j).getIsFilled() && myGame.getColumn(i + 1).getSlot(j).getIsRed() == iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < column && myGame.getColumn(i + 2).getSlot(j).getIsFilled() && myGame.getColumn(i + 2).getSlot(j).getIsRed() == iAmRed)
+	    			{
+	    				right++;
+	    			}
+	    		}
+	    		if (left + right > longest)
+	    		{
+	    			longest = left + right;
+	    			bestMove = i;
+	    		}
+	    		if (longest != 0 && left + right == longest)
+	    		{
+	    			cache++;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && j >=1 && myGame.getColumn(i - 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j - 1).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && j >=2 && myGame.getColumn(i - 2).getSlot(j - 2).getIsFilled() && myGame.getColumn(i - 2).getSlot(j - 2).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    			}
+	    		}
+	    		if (i + 1 < column && j + 1 < row && myGame.getColumn(i + 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i + 1).getSlot(j + 1).getIsRed() == iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < column && j + 2 < row && myGame.getColumn(i + 2).getSlot(j + 2).getIsFilled() && myGame.getColumn(i + 2).getSlot(j + 2).getIsRed() == iAmRed)
+	    			{
+	    				right++;
+	    			}
+	    		}
+	    		if (left + right > longest)
+	    		{
+	    			longest = left + right;
+	    			bestMove = i;
+	    		}
+	    		if (longest != 0 && left + right == longest)
+	    		{
+	    			cache++;
+	    		}
+	    		left = 0;
+	    		right = 0;
+	    		if (i >= 1 && j + 1 < row && myGame.getColumn(i - 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j + 1).getIsRed() == iAmRed)
+	    		{
+	    			left++;
+	    			if (i >= 2 && j + 2 < row && myGame.getColumn(i - 2).getSlot(j + 2).getIsFilled() && myGame.getColumn(i - 2).getSlot(j + 2).getIsRed() == iAmRed)
+	    			{
+	    				left++;
+	    			}
+	    		}
+	    		if (i + 1 < column && j >= 1 && myGame.getColumn(i + 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i + 1).getSlot(j - 1).getIsRed() == iAmRed)
+	    		{
+	    			right++;
+	    			if (i + 2 < column && j >= 2 &&  myGame.getColumn(i + 2).getSlot(j - 2).getIsFilled() && myGame.getColumn(i + 2).getSlot(j - 2).getIsRed() == iAmRed)
+	    			{
+	    				right++;
+	    			}
+	    		}
+	    		if (left + right > longest)
+	    		{
+	    			longest = left + right;
+	    			bestMove = i;
+	    		}
+	    		if (longest != 0 && left + right == longest)
+	    		{
+	    			cache++;
+	    		}
+	    		if (cache > howMuchBetter)
+	    		{
+	    			howMuchBetter = cache;
+	    			bestMove = i;
+	    		}
+	    		if (cache == howMuchBetter && Math.abs(column / 2 - i) < Math.abs(column / 2 - bestMove))
+	    		{
+	        		System.out.println("won't go rim" + bestMove);
+	    			bestMove = i;
+	        		System.out.println("go center" + bestMove);
+	    		}
+    		}
+    	}
+    	if (longest == 0 && getLowestEmptyIndex(myGame.getColumn(column / 2)) > -1)
+    	{
+    		bestMove = column / 2;
+    		System.out.println("won't go random" + bestMove);
+    	}
+    	int loop = 0;
+    	while (loop < 20 && (dangerous.contains(bestMove) || TheyCanWin(0, 1) == bestMove))
+    	{
+    		System.out.println("avoided dangerous move!" + bestMove);
+    		bestMove = randomMove();
+    		loop++;
+    	}
+		System.out.println("Brilliant!" + bestMove);
+        return bestMove;
+    }
 
+    /**
+     * Returns a dangerous valid move which will make the opponent win. MyAgent will avoid that move.
+     * 
+     */
+    public HashSet<Integer> dangerousMove()
+    {
+    	HashSet<Integer> dangerous = new HashSet<Integer>();
+    	for (int i = 0; i < myGame.getColumnCount(); i++)
+    	{
+	    	if (TheyCanWin(i, 1) > -1)
+	    	{
+	    		dangerous.add(TheyCanWin(i, 1));
+	    	}
+    	}
+    	return dangerous;
+    }
+    
     /**
      * Returns the column that would allow the agent to win.
      * 
@@ -230,11 +394,12 @@ public class MyAgent extends Agent
      * available so your agent can block them. Implement this method to return what column should
      * be blocked to prevent the opponent from winning.
      */
-    public int TheyCanWin()
+    public int TheyCanWin(int start, int suppose)
     {
-    	for (int i = 0; i < myGame.getColumnCount(); i++)
+    	int alsoDangerous = -1;
+    	for (int i = start; i < myGame.getColumnCount(); i++)
     	{
-    		int j = getLowestEmptyIndex(myGame.getColumn(i));
+    		int j = getLowestEmptyIndex(myGame.getColumn(i)) - suppose;
     		if (j > -1)
     		{
 	    		int left = 0;
@@ -271,6 +436,10 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j)
+	    		{
+	    			alsoDangerous = i;
+	    		}
 	    		left = 0;
 	    		right = 0;
 	    		if (i >= 1 && j >=1 && myGame.getColumn(i - 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j - 1).getIsRed() == !iAmRed)
@@ -300,6 +469,10 @@ public class MyAgent extends Agent
 	    		if (left + right >= 3)
 	    		{
 	    			return i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1)
+	    		{
+	    			alsoDangerous = i;
 	    		}
 	    		left = 0;
 	    		right = 0;
@@ -331,9 +504,13 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1)
+	    		{
+	    			alsoDangerous = i;
+	    		}
     		}
     	}
-        return -1;
+        return alsoDangerous;
     }
 
     public String getName()
