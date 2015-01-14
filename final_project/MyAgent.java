@@ -40,12 +40,12 @@ public class MyAgent extends Agent
     {
     	if (ICanWin() > -1)
     	{
-    		System.out.println("I can win!" + ICanWin());
+    		//System.out.println("I can win!" + ICanWin());
     		moveOnColumn(ICanWin());
     	}
     	else if (TheyCanWin(0, 0) > -1)
     	{
-    		System.out.println("They can win!" + TheyCanWin(0, 0));
+    		//System.out.println("They can win!" + TheyCanWin(0, 0));
     		moveOnColumn(TheyCanWin(0, 0));
     	}
     	else
@@ -283,6 +283,8 @@ public class MyAgent extends Agent
      */
     public int ICanWin()
     {
+    	int chance = -1;
+    	HashSet<Integer> dangerous = dangerousMove();
     	for (int i = 0; i < myGame.getColumnCount(); i++)
     	{
     		int j = getLowestEmptyIndex(myGame.getColumn(i));
@@ -290,9 +292,14 @@ public class MyAgent extends Agent
     		{
 	    		int left = 0;
 	    		int right = 0;
+	    		int route = 0;
 	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 3).getIsRed() == iAmRed)
 	    		{
 	    			return i;
+	    		}
+	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed)
+	    		{
+	    			route++;
 	    		}
 	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == iAmRed)
 	    		{
@@ -321,6 +328,14 @@ public class MyAgent extends Agent
 	    		if (left + right >= 3)
 	    		{
 	    			return i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j)
+	    		{
+	    			chance = i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j || getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j))
+	    		{
+	    			route++;
 	    		}
 	    		left = 0;
 	    		right = 0;
@@ -352,6 +367,14 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1)
+	    		{
+	    			chance = i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 || getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1))
+	    		{
+	    			route++;
+	    		}
 	    		left = 0;
 	    		right = 0;
 	    		if (i >= 1 && j + 1 < myGame.getRowCount() && myGame.getColumn(i - 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j + 1).getIsRed() == iAmRed)
@@ -382,9 +405,26 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1)
+	    		{
+	    			chance = i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1))
+	    		{
+	    			route++;
+	    		}
+	    		if (route > 1)
+	    		{
+	    			chance = i;
+	    			System.out.println("got two routes!");
+	    		}
     		}
     	}
-        return -1;
+		if (dangerous.contains(chance) || TheyCanWin(0, 0) > -1)
+		{
+			chance = -1;
+		}
+        return chance;
     }
 
     /**
@@ -396,7 +436,7 @@ public class MyAgent extends Agent
      */
     public int TheyCanWin(int start, int suppose)
     {
-    	int alsoDangerous = -1;
+    	int dangerous = -1;
     	for (int i = start; i < myGame.getColumnCount(); i++)
     	{
     		int j = getLowestEmptyIndex(myGame.getColumn(i)) - suppose;
@@ -404,9 +444,15 @@ public class MyAgent extends Agent
     		{
 	    		int left = 0;
 	    		int right = 0;
+	    		int route = 0;
 	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == !iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == !iAmRed && myGame.getColumn(i).getSlot(j + 3).getIsRed() == !iAmRed)
 	    		{
 	    			return i;
+	    		}
+	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == !iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == !iAmRed)
+	    		{
+	    			route++;
+	    			System.out.println("route" + route + i + j);
 	    		}
 	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == !iAmRed)
 	    		{
@@ -438,7 +484,12 @@ public class MyAgent extends Agent
 	    		}
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j)
 	    		{
-	    			alsoDangerous = i;
+	    			dangerous = i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j || getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j))
+	    		{
+	    			route++;
+	    			System.out.println("route" + route + i + j);
 	    		}
 	    		left = 0;
 	    		right = 0;
@@ -472,7 +523,12 @@ public class MyAgent extends Agent
 	    		}
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1)
 	    		{
-	    			alsoDangerous = i;
+	    			dangerous = i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 || getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1))
+	    		{
+	    			route++;
+	    			System.out.println("route" + route + i + j);
 	    		}
 	    		left = 0;
 	    		right = 0;
@@ -506,13 +562,23 @@ public class MyAgent extends Agent
 	    		}
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1)
 	    		{
-	    			alsoDangerous = i;
+	    			dangerous = i;
+	    		}
+	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1))
+	    		{
+	    			route++;
+	    			System.out.println("route" + route + i + j);
+	    		}
+	    		if (route > 1)
+	    		{
+	    			dangerous = i;
+	    			System.out.println("avoided two routes");
 	    		}
     		}
     	}
-        return alsoDangerous;
+        return dangerous;
     }
-
+    
     public String getName()
     {
         return "My Agent";
