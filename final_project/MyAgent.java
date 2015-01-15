@@ -116,26 +116,28 @@ public class MyAgent extends Agent
      */
     public int brilliantMove()
     {
-    	int longest = 0;
-    	int bestMove = randomMove();
-    	int howMuchBetter = 0;
+    	int longest = 0; //the current longest route. This move could make it one slot longer.
+    	int bestMove = randomMove(); //if there is no better move, the agent would make a random move.
+    	int howMuchBetter = 0; //how many longest routes could this move formulate
     	int row = myGame.getRowCount();
     	int column = myGame.getColumnCount();
     	HashSet<Integer> dangerous = dangerousMove();
-    	for (int i = 0; i < column; i++)
+    	for (int i = 0; i < column; i++) //check all the column to find if there is a most brilliant move
     	{
     		int j = getLowestEmptyIndex(myGame.getColumn(i));
-    		if (j > -1 && !dangerous.contains(i))
+    		if (j > -1 && !dangerous.contains(i)) //to make sure that this move won't make the opponent win
     		{
-    			int cache = 0;
+    			int cache = 0; //how many routes with the same length which is the longest are there
 	    		int left = 0;
 	    		int right = 0;
-	    		if (row - j > 1 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed)
+	    		
+	    		//to check if there is a vertical possible longest route
+	    		if (row - j > 1 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed) //to check if the topmost slot is your color
 	    		{
-	    			left++;
-	    			if (row - j > 2 && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed)
+	    			left++; //bottom
+	    			if (row - j > 2 && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed) //to check if the second top slot is your color
 	    			{
-	    				left++;
+	    				left++; //bottom
 	    			}
 	    		}
 	    		if (left + right > longest)
@@ -149,6 +151,8 @@ public class MyAgent extends Agent
 	    		}
 	    		left = 0;
 	    		right = 0;
+	    		
+	    		//to check if there is a horizontal possible longest route
 	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == iAmRed)
 	    		{
 	    			left++;
@@ -176,6 +180,8 @@ public class MyAgent extends Agent
 	    		}
 	    		left = 0;
 	    		right = 0;
+	    		
+	    		//to check if there is a slope possible longest route
 	    		if (i >= 1 && j >=1 && myGame.getColumn(i - 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j - 1).getIsRed() == iAmRed)
 	    		{
 	    			left++;
@@ -203,6 +209,8 @@ public class MyAgent extends Agent
 	    		}
 	    		left = 0;
 	    		right = 0;
+	    		
+	    		//to check if there is a slope possible longest route
 	    		if (i >= 1 && j + 1 < row && myGame.getColumn(i - 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j + 1).getIsRed() == iAmRed)
 	    		{
 	    			left++;
@@ -228,38 +236,44 @@ public class MyAgent extends Agent
 	    		{
 	    			cache++;
 	    		}
-	    		if (cache > howMuchBetter)
+	    		
+	    		if (cache > howMuchBetter) //to check if current move can make the most longest routes than the former one
 	    		{
 	    			howMuchBetter = cache;
 	    			bestMove = i;
 	    		}
-	    		if (cache == howMuchBetter && Math.abs(column / 2 - i) < Math.abs(column / 2 - bestMove))
+	    		
+	    		if (cache == howMuchBetter && Math.abs(column / 2 - i) < Math.abs(column / 2 - bestMove)) //it is better to place a piece near the center than near the rim
 	    		{
-	        		System.out.println("won't go rim" + bestMove);
+	        		//System.out.println("won't go rim" + bestMove);
 	    			bestMove = i;
-	        		System.out.println("go center" + bestMove);
+	        		//System.out.println("go center" + bestMove);
 	    		}
     		}
     	}
+    	
+    	//if there is no better move, place a piece in the middle
     	if (longest == 0 && getLowestEmptyIndex(myGame.getColumn(column / 2)) > -1)
     	{
     		bestMove = column / 2;
-    		System.out.println("won't go random" + bestMove);
+    		//System.out.println("won't go random" + bestMove);
     	}
+    	
+    	//if current move would make the opponent win, try another random one
     	int loop = 0;
     	while (loop < 20 && (dangerous.contains(bestMove) || TheyCanWin(0, 1) == bestMove))
     	{
-    		System.out.println("avoided dangerous move!" + bestMove);
+    		//System.out.println("avoided dangerous move!" + bestMove);
     		bestMove = randomMove();
     		loop++;
     	}
-		System.out.println("Brilliant!" + bestMove);
+		//System.out.println("Brilliant!" + bestMove);
         return bestMove;
     }
 
     /**
      * Returns a dangerous valid move which will make the opponent win. MyAgent will avoid that move.
-     * 
+     * If MyAgent place a piece in one of these columns, the opponent could win next turn by place a piece above it.
      */
     public HashSet<Integer> dangerousMove()
     {
@@ -293,10 +307,14 @@ public class MyAgent extends Agent
 	    		int left = 0;
 	    		int right = 0;
 	    		int route = 0;
+	    		
+	    		//vertical
 	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 3).getIsRed() == iAmRed)
 	    		{
 	    			return i;
 	    		}
+	    		
+	    		//horizontal
 	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == iAmRed)
 	    		{
 	    			route++;
@@ -329,6 +347,7 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		//to check if I place a piece in this column, then I would win in my next turn
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j)
 	    		{
 	    			chance = i;
@@ -339,6 +358,8 @@ public class MyAgent extends Agent
 	    		}
 	    		left = 0;
 	    		right = 0;
+	    		
+	    		//slope1
 	    		if (i >= 1 && j >=1 && myGame.getColumn(i - 1).getSlot(j - 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j - 1).getIsRed() == iAmRed)
 	    		{
 	    			left++;
@@ -367,6 +388,7 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		//to check if I place a piece in this column, then I would win in my next turn
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1)
 	    		{
 	    			chance = i;
@@ -377,6 +399,8 @@ public class MyAgent extends Agent
 	    		}
 	    		left = 0;
 	    		right = 0;
+	    		
+	    		//slope2
 	    		if (i >= 1 && j + 1 < myGame.getRowCount() && myGame.getColumn(i - 1).getSlot(j + 1).getIsFilled() && myGame.getColumn(i - 1).getSlot(j + 1).getIsRed() == iAmRed)
 	    		{
 	    			left++;
@@ -405,6 +429,7 @@ public class MyAgent extends Agent
 	    		{
 	    			return i;
 	    		}
+	    		//to check if I place a piece in this column, then I would win in my next turn
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1)
 	    		{
 	    			chance = i;
@@ -413,13 +438,17 @@ public class MyAgent extends Agent
 	    		{
 	    			route++;
 	    		}
+	    		
+	    		//to check if I could make more than two routes with three pieces, which might make me win in next turn
 	    		if (route > 1)
 	    		{
 	    			chance = i;
-	    			System.out.println("got two routes!");
+	    			//System.out.println("got two routes!");
 	    		}
     		}
     	}
+    	
+    	//to make sure that this move won't make the opponent win
 		if (dangerous.contains(chance) || TheyCanWin(0, 0) > -1)
 		{
 			chance = -1;
@@ -452,7 +481,6 @@ public class MyAgent extends Agent
 	    		if (myGame.getRowCount() - j > 3 && myGame.getColumn(i).getSlot(j + 1).getIsRed() == !iAmRed && myGame.getColumn(i).getSlot(j + 2).getIsRed() == !iAmRed)
 	    		{
 	    			route++;
-	    			System.out.println("route" + route + i + j);
 	    		}
 	    		if (i >= 1 && myGame.getColumn(i - 1).getSlot(j).getIsFilled() && myGame.getColumn(i - 1).getSlot(j).getIsRed() == !iAmRed)
 	    		{
@@ -489,7 +517,6 @@ public class MyAgent extends Agent
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j || getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j))
 	    		{
 	    			route++;
-	    			System.out.println("route" + route + i + j);
 	    		}
 	    		left = 0;
 	    		right = 0;
@@ -528,7 +555,6 @@ public class MyAgent extends Agent
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j - left - 1 || getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j + right + 1))
 	    		{
 	    			route++;
-	    			System.out.println("route" + route + i + j);
 	    		}
 	    		left = 0;
 	    		right = 0;
@@ -567,12 +593,12 @@ public class MyAgent extends Agent
 	    		if (left + right == 2 && i - left - 1 >= 0 && i + right + 1 < myGame.getColumnCount() && (getLowestEmptyIndex(myGame.getColumn(i - left - 1)) == j + left + 1 && getLowestEmptyIndex(myGame.getColumn(i + right + 1)) == j - right - 1))
 	    		{
 	    			route++;
-	    			System.out.println("route" + route + i + j);
+	    			//System.out.println("route" + route + i + j);
 	    		}
 	    		if (route > 1)
 	    		{
 	    			dangerous = i;
-	    			System.out.println("avoided two routes");
+	    			//System.out.println("avoided two routes");
 	    		}
     		}
     	}
