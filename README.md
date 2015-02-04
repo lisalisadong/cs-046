@@ -5,7 +5,7 @@ I am taking this object-oriented programming course taught in Java, by [Prof. Ca
 
 ##### Final Project:
 
-[Connect 4 Game Prject](https://github.com/lisalisadong/cs-046/tree/master/final_project)
+[Connect 4 Game Project](https://github.com/lisalisadong/cs-046/tree/master/final_project)
 
 [My Agent (Inplemented my own game-play logic)](https://github.com/lisalisadong/cs-046/blob/master/final_project/MyAgent.java)
 
